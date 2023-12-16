@@ -23,11 +23,9 @@ folders=''
 for i in __file__.split("\\")[0:len(__file__.split("\\"))-1]:
     folders = folders+i+'/'
     
-print(folders)
 
 
 oks = obes.get(f'https://kuramanime.pro/anime?order_by=latest&search={ok}&page=1')
-# print(oks.html.find('a'))
 for i in oks.html.xpath('/html/body/section/div/div/div/div/div/div/div/div/h5/a'):
     obs.append(i.attrs['href'])
 
@@ -42,12 +40,12 @@ opos = True
 opo = True
 ikkk =1
 session = HTMLSession()
-if(os.path.exists(f"{folders}/video")):
-    os.mkdir(f"{folders}/video")
+if(not (os.path.exists(f"{folders}video"))):
+    os.mkdir(f"{folders}video")
 while (opos):
     opo = True
     while (opo):
-        if (os.path.exists(f"{folders}/video/{((obs[ik].split('/'))[5]).replace('-',' ')} {ikkk}.mp4")):
+        if (os.path.exists(f"{folders}video/{((obs[ik].split('/'))[5]).replace('-',' ')} {ikkk}.mp4")):
             print(f"terskip bang si {((obs[ik].split('/'))[5]).replace('-',' ')} {ikkk}")
             break
         ok = session.get(obs[int(okk)-1]+f'/episode/{ikkk}')
@@ -71,7 +69,7 @@ while (opos):
                             print('gagal download, sedang mencoba lagi')
                             break
                             
-                        with open(f"{folders}/video/{((obs[ik].split('/'))[5]).replace('-',' ')} {ikkk}.mp4", 'wb') as f:
+                        with open(f"{folders}video/{((obs[ik].split('/'))[5]).replace('-',' ')} {ikkk}.mp4", 'wb') as f:
                             total_length = int(responsec.headers.get('content-length'))
                             for chunk in progress.bar(responsec.iter_content(chunk_size=1024), expected_size=(total_length/1024) + 1): 
                                 if chunk:
@@ -90,4 +88,3 @@ print(f"berikut link untuk mendownload anime {(obs[ik].split('/'))[5]}")
 for i in range(len(obss)):
     print(f'{i+1}. {obss[i]}')
                     
-
