@@ -1,9 +1,15 @@
-
-import os
-from requests_html import HTMLSession
-from clint.textui import progress
-import requests
-
+try:
+    import os
+    from requests_html import HTMLSession
+    from clint.textui import progress
+    import requests
+except:
+    import os
+    os.system("pip install requests-html")
+    os.system("pip install clint")
+    os.system("pip install requests")
+    
+    
 
 obes = HTMLSession()
 
